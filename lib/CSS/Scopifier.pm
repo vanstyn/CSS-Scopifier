@@ -17,6 +17,8 @@ sub scopify {
     unless ($selector && ! ref($selector));
   
 	$self->{"$selector $_"} = delete $self->{$_} for (keys %$self);
+  
+  return 1;
 }
 
 
