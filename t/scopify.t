@@ -52,4 +52,32 @@ div.foo body {
 ~,
 'Expected post-scopify CSS');
 
+ok( 
+  my $CSS2 = CSS::Scopifier->read('t/var/example.css'),
+  'Another new CSS::Scopifier object'
+);
+
+ok(
+  $CSS2->scopify('#myid', merge => ['html','body']),
+  'Call scopify() with options: merge => [\'html\',\'body\']'
+);
+
+is($CSS2->write_string,
+q~#myid h2 {
+	font-family: Georgia, "DejaVu Serif", serif;
+	font-size: 1.4em;
+	letter-spacing: .1em;
+}
+#myid h1 {
+	font-family: Georgia, "DejaVu Serif", serif;
+	font-size: 1.5em;
+	letter-spacing: .1em;
+}
+#myid {
+	font-family: "Palatino Linotype", Freeserif, serif;
+	letter-spacing: .05em;
+}
+~,
+'Expected post-scopify CSS with merge option supplied');
+
 done_testing;
