@@ -58,8 +58,8 @@ CSS::Scopifier - Prepends CSS selectors to apply scope/context
   # the '.myclass' selector rule:
   $CSS->scopify('.myclass', merge => ['html','body']);
   
-  # New, "scopified" version of the CSS, which each rule 
-  # was prepended with '.myclass':
+  # New, "scopified" version of the CSS with each rule 
+  # prepended with '.myclass':
   my $newCss = $CSS->write_string;
 
 =head1 DESCRIPTION
@@ -95,7 +95,7 @@ The CSS would then be:
 
 =head1 METHODS
 
-Note: C<CSS::Scopifier> extends C<CSS::Tiny>. Please see L<CSS::Tiny> for complete method list.
+Note: C<CSS::Scopifier> extends L<CSS::Tiny>. Please see L<CSS::Tiny> for complete API reference.
 
 =head2 scopify
 
