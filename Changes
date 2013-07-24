@@ -1,7 +1,8 @@
 Revision history for perl module CSS::Scopifier
 
-0.02 2013-07-??
+0.02 2013-07-24
     - Added Changes file, following the format in CPAN::Changes::Spec
+    - Added temp workaround for CSS::Tiny bug [rt.cpan.org #87261]
 
 0.01 2013-07-18
     - Initial release
