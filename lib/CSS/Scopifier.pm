@@ -37,6 +37,40 @@ sub scopify {
   return 1;
 }
 
+# Redefining read_string() until CSS::Tiny bug [rt.cpan.org #87261] is fixed
+sub read_string {
+    my $self = ref $_[0] ? shift : bless {}, shift;
+ 
+    # Flatten whitespace and remove /* comment */ style comments
+    my $string = shift;
+    $string =~ tr/\n\t/  /;
+    $string =~ s!/\*.*?\*\/!!g;
+ 
+    # Split into styles
+    foreach ( grep { /\S/ } split /(?<=\})/, $string ) {
+        unless ( /^\s*([^{]+?)\s*\{(.*)\}\s*$/ ) {
+            return $self->_error( "Invalid or unexpected style data '$_'" );
+        }
+ 
+        # Split in such a way as to support grouped styles
+        my $style      = $1;
+        my $properties = $2;
+        $style =~ s/\s{2,}/ /g;
+        my @styles = grep { s/\s+/ /g; 1; } grep { /\S/ } split /\s*,\s*/, $style;
+        foreach ( @styles ) { $self->{$_} ||= {} }
+ 
+        # Split into properties
+        foreach ( grep { /\S/ } split /\;/, $properties ) {
+            unless ( /^\s*(\*?[\w._-]+)\s*:\s*(.*?)\s*$/ ) { #<-- updated regex to support starting with '*'
+                return $self->_error( "Invalid or unexpected property '$_' in style '$style'" );
+            }
+            foreach ( @styles ) { $self->{$_}->{lc $1} = $2 }
+        }
+    }
+ 
+    $self
+}
+
 
 1;
 
