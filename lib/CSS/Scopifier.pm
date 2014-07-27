@@ -4,7 +4,7 @@ use warnings;
 
 # ABSTRACT: Prepends CSS selectors to apply scope/context
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 use CSS::Tiny 1.19;
 
