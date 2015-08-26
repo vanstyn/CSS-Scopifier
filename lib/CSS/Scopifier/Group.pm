@@ -82,6 +82,23 @@ sub read_string {
 }
 
 
+### honor the origical CSS::Tiny API:
+
+# Generate a HTML fragment for the CSS
+sub html {
+  my $css = $_[0]->write_string or return '';
+  return "<style type=\"text/css\">\n<!--\n${css}-->\n</style>";
+}
+ 
+# Generate an xhtml fragment for the CSS
+sub xhtml {
+  my $css = $_[0]->write_string or return '';
+  return "<style type=\"text/css\">\n/* <![CDATA[ */\n${css}/* ]]> */\n</style>";
+}
+ 
+# Error handling
+sub errstr { $CSS::Tiny::errstr }
+sub _error { $CSS::Tiny::errstr = $_[1]; undef }
 
 
 1;
