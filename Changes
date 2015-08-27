@@ -1,5 +1,8 @@
 Revision history for perl module CSS::Scopifier
 
+0.04 2015-08-26
+    - Added CSS::Scopifier::Group
+
 0.03 2014-07-27
     - Travis + Coveralls support
     - Fixed bad files modes (files erroneously set with execute bit)
