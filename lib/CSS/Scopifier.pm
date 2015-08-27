@@ -127,6 +127,9 @@ The CSS would then be:
     letter-spacing: .1em;
   }
 
+Note: C<CSS::Scopifier> only supports single-level CSS; to scopify across nested/grouped rules
+(i.e. grouped within rules like C<@media print { ... }>) use L<CSS::Scopifier::Group>.
+
 =head1 METHODS
 
 Note: C<CSS::Scopifier> extends L<CSS::Tiny>. Please see L<CSS::Tiny> for complete API reference.
